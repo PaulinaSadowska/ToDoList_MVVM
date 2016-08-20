@@ -1,0 +1,25 @@
+{
+    "todo_list": [
+        {
+            "task": "go out with the dog",
+            "completed": false,
+            "id": 1
+    },
+        {
+            "task": "make dinner",
+            "completed": false,
+            "id": 2
+    },
+        {
+            "task": "throw out the garbage",
+            "completed": false,
+            "id": 3
+    }
+        ,
+        {
+            "task": "clean the dishes",
+            "completed": false,
+            "id": 4
+    }
+    ]
+}
