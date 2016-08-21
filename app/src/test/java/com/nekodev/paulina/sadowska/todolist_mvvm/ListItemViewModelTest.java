@@ -2,7 +2,7 @@ package com.nekodev.paulina.sadowska.todolist_mvvm;
 
 import android.content.Context;
 
-import com.nekodev.paulina.sadowska.todolist_mvvm.data.ToDoItem;
+import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 import com.nekodev.paulina.sadowska.todolist_mvvm.util.DefaultConfig;
 import com.nekodev.paulina.sadowska.todolist_mvvm.util.MockModelUtil;
 import com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.ListItemViewModel;

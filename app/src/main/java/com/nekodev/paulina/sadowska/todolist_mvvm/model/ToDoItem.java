@@ -1,4 +1,4 @@
-package com.nekodev.paulina.sadowska.todolist_mvvm.data;
+package com.nekodev.paulina.sadowska.todolist_mvvm.model;
 
 /**
  * Created by Paulina Sadowska on 20.08.2016.

@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.nekodev.paulina.sadowska.todolist_mvvm.R;
-import com.nekodev.paulina.sadowska.todolist_mvvm.data.ToDoItem;
+import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 import com.nekodev.paulina.sadowska.todolist_mvvm.databinding.ItemTodoBinding;
 import com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.ListItemViewModel;
 

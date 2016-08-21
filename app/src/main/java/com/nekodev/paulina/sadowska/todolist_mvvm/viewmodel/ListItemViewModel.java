@@ -3,7 +3,7 @@ package com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel;
 import android.content.Context;
 import android.databinding.BaseObservable;
 
-import com.nekodev.paulina.sadowska.todolist_mvvm.data.ToDoItem;
+import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 
 /**
  * Created by Paulina Sadowska on 20.08.2016.

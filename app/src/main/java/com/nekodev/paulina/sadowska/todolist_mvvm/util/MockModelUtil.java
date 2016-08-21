@@ -1,6 +1,6 @@
 package com.nekodev.paulina.sadowska.todolist_mvvm.util;
 
-import com.nekodev.paulina.sadowska.todolist_mvvm.data.ToDoItem;
+import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 
 /**
  * Created by Paulina Sadowska on 21.08.2016.

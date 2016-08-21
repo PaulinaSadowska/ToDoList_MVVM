@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ToDoList_MVVM</string>
+    <string name="connection_problem">There was problem while fetching data</string>
 </resources>
