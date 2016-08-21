@@ -6,6 +6,7 @@ package com.nekodev.paulina.sadowska.todolist_mvvm.data;
 
 public class ToDoItem {
 
+    private int id;
     private boolean completed;
     private String task;
 
@@ -28,5 +29,13 @@ public class ToDoItem {
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
