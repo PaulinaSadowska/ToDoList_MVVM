@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitHelper {
 
-    public ToDoService newHackerNewsService() {
+    public ToDoService newToDoListService() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ToDoService.ENDPOINT)
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()))

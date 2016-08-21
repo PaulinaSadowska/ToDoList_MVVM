@@ -1,6 +1,8 @@
-package com.nekodev.paulina.sadowska.todolist_mvvm.injection.module;
+package com.nekodev.paulina.sadowska.test.injection.modules;
 
-import com.nekodev.paulina.sadowska.todolist_mvvm.data.remote.RetrofitHelper;
+/**
+ * Created by Paulina Sadowska on 21.08.2016.
+ */
 import com.nekodev.paulina.sadowska.todolist_mvvm.data.remote.ToDoService;
 import com.nekodev.paulina.sadowska.todolist_mvvm.injection.scope.PerDataManager;
 
@@ -9,26 +11,26 @@ import dagger.Provides;
 import rx.Scheduler;
 import rx.schedulers.Schedulers;
 
+import static org.mockito.Mockito.mock;
+
 /**
- * Created by Paulina Sadowska on 21.08.2016.
+ * Provides dependencies for an app running on a testing environment
+ * This allows injecting mocks if necessary
  */
-
 @Module
-public class DataManagerModule {
+public class DataManagerTestModule {
 
-    public DataManagerModule() {
-
-    }
+    public DataManagerTestModule() { }
 
     @Provides
     @PerDataManager
     ToDoService provideToDoService() {
-        return new RetrofitHelper().newToDoListService();
+        return mock(ToDoService.class);
     }
 
     @Provides
     @PerDataManager
     Scheduler provideSubscribeScheduler() {
-        return Schedulers.io();
+        return Schedulers.immediate();
     }
 }
