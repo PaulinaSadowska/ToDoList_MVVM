@@ -1,10 +1,12 @@
 package com.nekodev.paulina.sadowska.todolist_mvvm.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Paulina Sadowska on 20.08.2016.
  */
 
-public class ToDoItem {
+public class ToDoItem implements Serializable {
 
     private int id;
     private boolean completed;

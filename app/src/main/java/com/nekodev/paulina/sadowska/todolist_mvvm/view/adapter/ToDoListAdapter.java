@@ -11,6 +11,7 @@ import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 import com.nekodev.paulina.sadowska.todolist_mvvm.databinding.ItemTodoBinding;
 import com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.ListItemViewModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -52,6 +53,14 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.Bindin
     @Override
     public int getItemCount() {
         return mToDoList.size();
+    }
+
+    public Serializable getTasks() {
+        return mToDoList;
+    }
+
+    public void addTasks(ArrayList<ToDoItem> tasks) {
+        mToDoList.addAll(tasks);
     }
 
     public static class BindingHolder extends RecyclerView.ViewHolder {

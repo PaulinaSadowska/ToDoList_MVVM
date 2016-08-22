@@ -15,6 +15,9 @@ import com.nekodev.paulina.sadowska.todolist_mvvm.data.DataManager;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 import com.nekodev.paulina.sadowska.todolist_mvvm.view.adapter.ToDoListAdapter;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Subscriber;
@@ -27,6 +30,7 @@ import rx.subscriptions.CompositeSubscription;
 
 public class ToDoListFragment extends Fragment {
 
+    private static final String SAVED_TASKS_KEY = "SavedTasksKey";
     @BindView(R.id.recycler_todos)
     RecyclerView mToDoList;
 
@@ -46,17 +50,36 @@ public class ToDoListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_todolist, container, false);
-        ButterKnife.setDebug(true);
         ButterKnife.bind(this, view);
+        if(savedInstanceState!=null && savedInstanceState.containsKey(SAVED_TASKS_KEY)){
+            Serializable tasks = savedInstanceState.getSerializable(SAVED_TASKS_KEY);
+            if(tasks instanceof ArrayList) {
+                mToDoListAdapter.addTasks((ArrayList)tasks);
+            }
+        }
         setupRecyclerView();
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(SAVED_TASKS_KEY, mToDoListAdapter.getTasks());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mCompositeSubscription.unsubscribe();
     }
 
     private void setupRecyclerView() {
         mToDoList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mToDoList.setHasFixedSize(true);
         mToDoList.setAdapter(mToDoListAdapter);
-        getTaskList();
+        if(mToDoListAdapter.getItemCount()==0) {
+            getTaskList();
+        }
     }
 
     private void getTaskList() {
