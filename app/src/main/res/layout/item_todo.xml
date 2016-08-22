@@ -21,9 +21,10 @@
             android:orientation="horizontal">
 
             <CheckBox
+                android:id="@+id/task_item_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="@{viewModel.isCompleted}"/>
+                android:checked="@={viewModel.isCompleted}"/>
 
             <TextView
                 android:layout_width="wrap_content"

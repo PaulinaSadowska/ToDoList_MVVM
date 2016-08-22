@@ -23,6 +23,10 @@ public class ListItemViewModel extends BaseObservable {
         return mTask.isCompleted();
     }
 
+    public void setIsCompleted(Boolean completed){
+        mTask.setCompleted(completed);
+    }
+
     public String getTask(){
         return mTask.getTask();
     }
