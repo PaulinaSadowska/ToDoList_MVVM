@@ -1,7 +1,7 @@
 package com.nekodev.paulina.sadowska.test;
 
-import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
+import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -9,6 +9,7 @@ import com.nekodev.paulina.sadowska.test.injection.TestComponentRule;
 import com.nekodev.paulina.sadowska.todolist_mvvm.R;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 import com.nekodev.paulina.sadowska.todolist_mvvm.util.MockModelUtil;
+import com.nekodev.paulina.sadowska.todolist_mvvm.view.activity.EditTaskActivity;
 import com.nekodev.paulina.sadowska.todolist_mvvm.view.activity.MainActivity;
 
 import org.junit.Rule;
@@ -21,7 +22,10 @@ import java.util.List;
 import rx.Observable;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -63,9 +67,21 @@ public class MainActivityTest {
         onView(withId(R.id.recycler_todos))
                 .check(matches(isDisplayed()));
         onView(withId(R.id.task_item_checkbox))
-                .perform(ViewActions.click())
+                .perform(click())
                 .check(matches(isChecked()));
         assertTrue(task.isCompleted());
+    }
+
+    @Test
+    public void testEditTaskActivityLaunches() {
+        Intents.init();
+        ToDoItem task = MockModelUtil.createMockTask();
+        stubMockTask(task);
+        main.launchActivity(null);
+        onView(withText(task.getTask()))
+                .perform(click());
+        intended(hasComponent(EditTaskActivity.class.getName()));
+        Intents.release();
     }
 
     private void stubMockTask(ToDoItem task) {

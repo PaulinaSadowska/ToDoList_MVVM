@@ -2,8 +2,10 @@ package com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel;
 
 import android.content.Context;
 import android.databinding.BaseObservable;
+import android.view.View;
 
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
+import com.nekodev.paulina.sadowska.todolist_mvvm.view.activity.EditTaskActivity;
 
 /**
  * Created by Paulina Sadowska on 20.08.2016.
@@ -36,5 +38,13 @@ public class TaskViewModel extends BaseObservable {
     }
 
     public String getId(){  return mTask.getId() + ""; }
+
+    public View.OnClickListener onClickTask() {
+        return v -> launchDetailsActivity();
+    }
+
+    private void launchDetailsActivity() {
+        mContext.startActivity(EditTaskActivity.getStartIntent(mContext, mTask));
+    }
 
 }
