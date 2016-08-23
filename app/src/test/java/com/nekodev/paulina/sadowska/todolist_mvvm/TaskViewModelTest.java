@@ -5,7 +5,7 @@ import android.content.Context;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 import com.nekodev.paulina.sadowska.todolist_mvvm.util.DefaultConfig;
 import com.nekodev.paulina.sadowska.todolist_mvvm.util.MockModelUtil;
-import com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.ListItemViewModel;
+import com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.TaskViewModel;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,26 +23,26 @@ import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = DefaultConfig.EMULATE_SDK, manifest = DefaultConfig.MANIFEST)
-public class ListItemViewModelTest {
+public class TaskViewModelTest {
 
-    private ListItemViewModel mListItemViewModel;
+    private TaskViewModel mTaskViewModel;
     private ToDoItem mToDoItem;
 
     @Before
     public void setUp() {
         Context context = RuntimeEnvironment.application;
         mToDoItem = MockModelUtil.createMockTask();
-        mListItemViewModel = new ListItemViewModel(context, mToDoItem);
+        mTaskViewModel = new TaskViewModel(context, mToDoItem);
     }
 
     @Test
     public void shouldGetTaskText() throws Exception {
-        assertEquals(mListItemViewModel.getTask(), mToDoItem.getTask());
+        assertEquals(mTaskViewModel.getTask(), mToDoItem.getTask());
     }
 
     @Test
     public void shouldGetIsCompleted() throws Exception {
-        assertTrue(mListItemViewModel.isCompleted() == mToDoItem.isCompleted());
+        assertTrue(mTaskViewModel.isCompleted() == mToDoItem.isCompleted());
     }
 
 }

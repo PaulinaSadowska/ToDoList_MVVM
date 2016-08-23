@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.ListItemViewModel" />
+            type="com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.TaskViewModel" />
     </data>
 
     <android.support.v7.widget.CardView

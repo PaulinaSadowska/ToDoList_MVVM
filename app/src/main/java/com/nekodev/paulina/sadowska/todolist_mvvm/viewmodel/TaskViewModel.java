@@ -9,21 +9,21 @@ import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
  * Created by Paulina Sadowska on 20.08.2016.
  */
 
-public class ListItemViewModel extends BaseObservable {
+public class TaskViewModel extends BaseObservable {
 
     private Context mContext;
     private ToDoItem mTask;
 
-    public ListItemViewModel(Context context, ToDoItem task){
+    public TaskViewModel(Context context, ToDoItem task){
         this.mContext = context;
         this.mTask = task;
     }
 
-    public Boolean isCompleted(){
+    public boolean isCompleted(){
         return mTask.isCompleted();
     }
 
-    public void setIsCompleted(Boolean completed){
+    public void setIsCompleted(boolean completed){
         mTask.setCompleted(completed);
     }
 
@@ -31,6 +31,10 @@ public class ListItemViewModel extends BaseObservable {
         return mTask.getTask();
     }
 
+    public void setTask(String taskText){
+        mTask.setTask(taskText);
+    }
 
+    public String getId(){  return mTask.getId() + ""; }
 
 }

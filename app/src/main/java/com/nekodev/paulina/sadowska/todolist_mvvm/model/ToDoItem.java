@@ -9,12 +9,13 @@ import java.io.Serializable;
 public class ToDoItem implements Serializable {
 
     private int id;
-    private boolean completed;
+    private Boolean completed;
     private String task;
 
-    public ToDoItem(Boolean completed, String task){
+    public ToDoItem(Boolean completed, String task, int id){
         this.completed = completed;
         this.task = task;
+        this.id = id;
     }
 
     public String getTask() {
@@ -25,11 +26,11 @@ public class ToDoItem implements Serializable {
         this.task = task;
     }
 
-    public boolean isCompleted() {
+    public Boolean isCompleted() {
         return completed;
     }
 
-    public void setCompleted(boolean completed) {
+    public void setCompleted(Boolean completed) {
         this.completed = completed;
     }
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.TaskViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/edit_task_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="id: 2"
+            android:text="@{viewModel.id}"/>
+
+        <CheckBox
+            android:id="@+id/task_item_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@={viewModel.isCompleted}"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            tools:text="some title"
+            android:text="@={viewModel.task}"/>
+
+        <Button
+            android:id="@+id/edit_task_save_button"
+            style="@android:style/Widget.Holo.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save_task"
+            android:textColor="@color/colorAccent" />
+
+
+    </LinearLayout>
+</layout>

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.nekodev.paulina.sadowska.todolist_mvvm.R;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 import com.nekodev.paulina.sadowska.todolist_mvvm.databinding.ItemTodoBinding;
-import com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.ListItemViewModel;
+import com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.TaskViewModel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.Bindin
     @Override
     public void onBindViewHolder(ToDoListAdapter.BindingHolder holder, int position) {
         ItemTodoBinding todoBinding = holder.binding;
-        todoBinding.setViewModel(new ListItemViewModel(mContext, mToDoList.get(position)));
+        todoBinding.setViewModel(new TaskViewModel(mContext, mToDoList.get(position)));
     }
 
     @Override
