@@ -12,10 +12,20 @@ public class ToDoItem implements Serializable {
     private Boolean completed;
     private String task;
 
+    private boolean modified;
+
     public ToDoItem(Boolean completed, String task, int id){
         this.completed = completed;
         this.task = task;
         this.id = id;
+        this.modified = false;
+    }
+
+    public ToDoItem(Boolean completed, String task, int id, boolean modified){
+        this.completed = completed;
+        this.task = task;
+        this.id = id;
+        this.modified = modified;
     }
 
     public String getTask() {
@@ -40,5 +50,13 @@ public class ToDoItem implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public boolean wasModified() {
+        return modified;
+    }
+
+    public void setWasModified() {
+        this.modified = true;
     }
 }

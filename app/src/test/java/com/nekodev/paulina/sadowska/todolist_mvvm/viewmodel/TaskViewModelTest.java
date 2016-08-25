@@ -1,6 +1,7 @@
 package com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel;
 
 import android.content.Context;
+import android.view.View;
 
 import com.nekodev.paulina.sadowska.todolist_mvvm.BuildConfig;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
@@ -49,8 +50,15 @@ public class TaskViewModelTest {
     public void shouldSetIsCompleted() {
         mTaskViewModel.setIsCompleted(false);
         assertTrue(mTaskViewModel.isCompleted() == mToDoItem.isCompleted());
+        assertTrue(mToDoItem.wasModified());
         mTaskViewModel.setIsCompleted(true);
         assertTrue(mTaskViewModel.isCompleted() == mToDoItem.isCompleted());
+    }
+
+    @Test
+    public void shouldBeVisibleWhenItemWasModified(){
+        mToDoItem.setWasModified();
+        assertEquals(mTaskViewModel.wasModified(), View.VISIBLE);
     }
 
 }

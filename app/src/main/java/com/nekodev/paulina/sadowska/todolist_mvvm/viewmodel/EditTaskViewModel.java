@@ -28,6 +28,7 @@ public class EditTaskViewModel  extends BaseObservable {
 
         public void setIsCompleted(boolean completed){
             mTask.setCompleted(completed);
+            mTask.setWasModified();
         }
 
         public String getTask(){
@@ -36,6 +37,7 @@ public class EditTaskViewModel  extends BaseObservable {
 
         public void setTask(String taskText){
             mTask.setTask(taskText);
+            mTask.setWasModified();
         }
 
         public String getId(){  return mTask.getId() + ""; }

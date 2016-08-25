@@ -28,6 +28,7 @@ public class TaskViewModel extends BaseObservable {
 
     public void setIsCompleted(boolean completed){
         mTask.setCompleted(completed);
+        mTask.setWasModified();
     }
 
     public String getTask(){
@@ -50,4 +51,10 @@ public class TaskViewModel extends BaseObservable {
                 EditTaskActivity.ACTIVITY_RESULT_CODE);
     }
 
+    public int wasModified() {
+        if(mTask.wasModified()) {
+            return View.VISIBLE;
+        }
+        return View.INVISIBLE;
+    }
 }
