@@ -1,10 +1,10 @@
-package com.nekodev.paulina.sadowska.todolist_mvvm.view.activity;
+package com.nekodev.paulina.sadowska.todolist_mvvm.controller.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.nekodev.paulina.sadowska.todolist_mvvm.R;
-import com.nekodev.paulina.sadowska.todolist_mvvm.view.fragment.ToDoListFragment;
+import com.nekodev.paulina.sadowska.todolist_mvvm.controller.fragment.ToDoListFragment;
 
 /**
  * Created by Paulina Sadowska on 20.08.2016.

@@ -1,4 +1,4 @@
-package com.nekodev.paulina.sadowska.todolist_mvvm.view.adapter;
+package com.nekodev.paulina.sadowska.todolist_mvvm.controller.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;

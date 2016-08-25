@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.TaskViewModel" />
+            type="com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.EditTaskViewModel" />
     </data>
 
     <LinearLayout
@@ -41,7 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save_task"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:onClick="@{viewModel.onClickSave}"/>
 
 
     </LinearLayout>

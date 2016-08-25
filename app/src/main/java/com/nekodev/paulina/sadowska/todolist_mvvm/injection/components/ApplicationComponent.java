@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.nekodev.paulina.sadowska.todolist_mvvm.data.DataManager;
 import com.nekodev.paulina.sadowska.todolist_mvvm.injection.module.ApplicationModule;
-import com.nekodev.paulina.sadowska.todolist_mvvm.view.activity.MainActivity;
+import com.nekodev.paulina.sadowska.todolist_mvvm.controller.activity.MainActivity;
 
 import javax.inject.Singleton;
 

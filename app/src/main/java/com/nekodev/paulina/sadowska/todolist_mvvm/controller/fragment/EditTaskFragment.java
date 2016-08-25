@@ -1,4 +1,4 @@
-package com.nekodev.paulina.sadowska.todolist_mvvm.view.fragment;
+package com.nekodev.paulina.sadowska.todolist_mvvm.controller.fragment;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nekodev.paulina.sadowska.todolist_mvvm.R;
+import com.nekodev.paulina.sadowska.todolist_mvvm.controller.activity.EditTaskActivity;
 import com.nekodev.paulina.sadowska.todolist_mvvm.databinding.FragmentEditTaskBinding;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
-import com.nekodev.paulina.sadowska.todolist_mvvm.view.activity.EditTaskActivity;
-import com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.TaskViewModel;
+import com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.EditTaskViewModel;
 
 import java.io.Serializable;
 
@@ -42,7 +42,7 @@ public class EditTaskFragment extends Fragment {
             Serializable serializable = getArguments().getSerializable(EditTaskActivity.EXTRA_TASK_DATA);
             if(serializable!= null && serializable instanceof ToDoItem) {
                 mTask = (ToDoItem) getArguments().getSerializable(EditTaskActivity.EXTRA_TASK_DATA);
-                mEditTaskBinding.setViewModel(new TaskViewModel(getActivity(), mTask));
+                mEditTaskBinding.setViewModel(new EditTaskViewModel(getActivity(), mTask));
             }
         }
         else{

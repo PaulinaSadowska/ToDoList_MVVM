@@ -9,8 +9,8 @@ import com.nekodev.paulina.sadowska.test.injection.TestComponentRule;
 import com.nekodev.paulina.sadowska.todolist_mvvm.R;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 import com.nekodev.paulina.sadowska.todolist_mvvm.util.MockModelUtil;
-import com.nekodev.paulina.sadowska.todolist_mvvm.view.activity.EditTaskActivity;
-import com.nekodev.paulina.sadowska.todolist_mvvm.view.activity.MainActivity;
+import com.nekodev.paulina.sadowska.todolist_mvvm.controller.activity.EditTaskActivity;
+import com.nekodev.paulina.sadowska.todolist_mvvm.controller.activity.MainActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

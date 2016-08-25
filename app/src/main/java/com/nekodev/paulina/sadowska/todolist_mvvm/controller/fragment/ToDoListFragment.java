@@ -1,4 +1,4 @@
-package com.nekodev.paulina.sadowska.todolist_mvvm.view.fragment;
+package com.nekodev.paulina.sadowska.todolist_mvvm.controller.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,7 +13,7 @@ import com.nekodev.paulina.sadowska.todolist_mvvm.R;
 import com.nekodev.paulina.sadowska.todolist_mvvm.ToDoListApplication;
 import com.nekodev.paulina.sadowska.todolist_mvvm.data.DataManager;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
-import com.nekodev.paulina.sadowska.todolist_mvvm.view.adapter.ToDoListAdapter;
+import com.nekodev.paulina.sadowska.todolist_mvvm.controller.adapter.ToDoListAdapter;
 
 import java.io.Serializable;
 import java.util.ArrayList;

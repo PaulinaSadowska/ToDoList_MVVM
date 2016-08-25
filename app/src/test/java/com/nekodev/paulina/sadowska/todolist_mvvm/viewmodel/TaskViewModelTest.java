@@ -1,11 +1,11 @@
-package com.nekodev.paulina.sadowska.todolist_mvvm;
+package com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel;
 
 import android.content.Context;
 
+import com.nekodev.paulina.sadowska.todolist_mvvm.BuildConfig;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 import com.nekodev.paulina.sadowska.todolist_mvvm.util.DefaultConfig;
 import com.nekodev.paulina.sadowska.todolist_mvvm.util.MockModelUtil;
-import com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.TaskViewModel;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +42,14 @@ public class TaskViewModelTest {
 
     @Test
     public void shouldGetIsCompleted() throws Exception {
+        assertTrue(mTaskViewModel.isCompleted() == mToDoItem.isCompleted());
+    }
+
+    @Test
+    public void shouldSetIsCompleted() {
+        mTaskViewModel.setIsCompleted(false);
+        assertTrue(mTaskViewModel.isCompleted() == mToDoItem.isCompleted());
+        mTaskViewModel.setIsCompleted(true);
         assertTrue(mTaskViewModel.isCompleted() == mToDoItem.isCompleted());
     }
 

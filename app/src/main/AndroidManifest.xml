@@ -11,14 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".view.activity.MainActivity">
+        <activity android:name=".controller.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.activity.EditTaskActivity"
+            android:name=".controller.activity.EditTaskActivity"
             android:theme="@style/EditTaskDialogTheme" />
 
     </application>
