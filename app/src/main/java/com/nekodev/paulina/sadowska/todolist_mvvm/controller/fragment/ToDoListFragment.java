@@ -1,5 +1,6 @@
 package com.nekodev.paulina.sadowska.todolist_mvvm.controller.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.nekodev.paulina.sadowska.todolist_mvvm.R;
 import com.nekodev.paulina.sadowska.todolist_mvvm.ToDoListApplication;
+import com.nekodev.paulina.sadowska.todolist_mvvm.controller.activity.EditTaskActivity;
 import com.nekodev.paulina.sadowska.todolist_mvvm.data.DataManager;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 import com.nekodev.paulina.sadowska.todolist_mvvm.controller.adapter.ToDoListAdapter;
@@ -23,6 +25,8 @@ import butterknife.ButterKnife;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.CompositeSubscription;
+
+import static com.nekodev.paulina.sadowska.todolist_mvvm.controller.activity.EditTaskActivity.EXTRA_TASK_DATA;
 
 /**
  * Created by Paulina Sadowska on 20.08.2016.
@@ -65,6 +69,15 @@ public class ToDoListFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable(SAVED_TASKS_KEY, mToDoListAdapter.getTasks());
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == EditTaskActivity.ACTIVITY_RESULT_CODE && mToDoListAdapter!=null && data != null){
+            if(data.hasExtra(EXTRA_TASK_DATA)) {
+                mToDoListAdapter.editTask((ToDoItem) data.getExtras().getSerializable(EXTRA_TASK_DATA));
+            }
+        }
     }
 
     @Override

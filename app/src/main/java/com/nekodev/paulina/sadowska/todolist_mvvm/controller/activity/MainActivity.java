@@ -1,5 +1,6 @@
 package com.nekodev.paulina.sadowska.todolist_mvvm.controller.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -11,6 +12,8 @@ import com.nekodev.paulina.sadowska.todolist_mvvm.controller.fragment.ToDoListFr
  */
 
 public class MainActivity extends AppCompatActivity {
+
+    private ToDoListFragment mToDoListFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,9 +27,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addToDoListFragment() {
+        mToDoListFragment = new ToDoListFragment();
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.content_frame, new ToDoListFragment())
+                .replace(R.id.content_frame, mToDoListFragment)
                 .commit();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(mToDoListFragment!=null) {
+            mToDoListFragment.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

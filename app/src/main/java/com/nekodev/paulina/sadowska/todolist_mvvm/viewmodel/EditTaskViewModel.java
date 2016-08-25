@@ -1,10 +1,11 @@
 package com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.databinding.BaseObservable;
 import android.view.View;
-import android.widget.Toast;
 
+import com.nekodev.paulina.sadowska.todolist_mvvm.controller.activity.EditTaskActivity;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 
 /**
@@ -40,7 +41,14 @@ public class EditTaskViewModel  extends BaseObservable {
         public String getId(){  return mTask.getId() + ""; }
 
         public View.OnClickListener onClickSave(){
-            return v -> Toast.makeText(mContext, "save", Toast.LENGTH_SHORT).show();
+            return v -> sendActivityResult();
         }
 
+    private void sendActivityResult() {
+        ((Activity)mContext).setResult(
+                EditTaskActivity.ACTIVITY_RESULT_CODE,
+                EditTaskActivity.getResultIntent(mContext, mTask));
+        ((Activity)mContext).finish();
     }
+
+}

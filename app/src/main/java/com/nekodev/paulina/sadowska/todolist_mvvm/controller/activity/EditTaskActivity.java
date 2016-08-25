@@ -15,9 +15,16 @@ import com.nekodev.paulina.sadowska.todolist_mvvm.controller.fragment.EditTaskFr
 
 public class EditTaskActivity extends AppCompatActivity {
     public static final String EXTRA_TASK_DATA = "extraTaskDataKey";
+    public static final int ACTIVITY_RESULT_CODE = 77;
 
     public static Intent getStartIntent(Context context, ToDoItem task) {
         Intent intent = new Intent(context, EditTaskActivity.class);
+        intent.putExtra(EXTRA_TASK_DATA, task);
+        return intent;
+    }
+
+    public static Intent getResultIntent(Context context, ToDoItem task) {
+        Intent intent = new Intent();
         intent.putExtra(EXTRA_TASK_DATA, task);
         return intent;
     }
