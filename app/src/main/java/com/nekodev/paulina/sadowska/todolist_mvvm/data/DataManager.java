@@ -8,6 +8,8 @@ import com.nekodev.paulina.sadowska.todolist_mvvm.injection.components.DaggerDat
 import com.nekodev.paulina.sadowska.todolist_mvvm.injection.module.DataManagerModule;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.realm.Realm;
@@ -18,11 +20,14 @@ import rx.Scheduler;
  * Created by Paulina Sadowska on 21.08.2016.
  */
 
-public class DataManager  {
+public class DataManager {
 
-    @Inject protected ToDoService mToDoService;
-    @Inject protected Scheduler mSubscribeScheduler;
-    @Inject protected Realm mRealm;
+    @Inject
+    protected ToDoService mToDoService;
+    @Inject
+    protected Scheduler mSubscribeScheduler;
+    @Inject
+    protected Realm mRealm;
 
     public DataManager(Context context) {
         injectDependencies(context);
@@ -47,12 +52,20 @@ public class DataManager  {
                 .inject(this);
     }
 
-    public Observable<ToDoItem> getTasks(){
-        return mToDoService.getTasks()
-                .flatMap(Observable::from);
+    public Observable<ToDoItem> getTasks() {
+        return getSavedTasks()
+                .mergeWith(mToDoService.getTasks())
+                .flatMap(Observable::from)
+                .distinct(ToDoItem::getId);
     }
 
-    public void saveTask(ToDoItem task){
+    private Observable<List<ToDoItem>> getSavedTasks() {
+        return Observable.just(
+                mRealm.copyFromRealm(mRealm.where(ToDoItem.class).findAllSorted("id")));
+    }
+
+
+    public void saveTask(ToDoItem task) {
         mRealm.beginTransaction();
         mRealm.copyToRealmOrUpdate(task);
         mRealm.commitTransaction();

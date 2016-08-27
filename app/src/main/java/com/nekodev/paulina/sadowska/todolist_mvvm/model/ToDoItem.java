@@ -74,4 +74,14 @@ public class ToDoItem extends RealmObject implements Serializable {
     public void setModified() {
         this.modified = true;
     }
+
+    @Override
+    public int hashCode() {
+        return this.id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ToDoItem && this.id == ((ToDoItem) obj).getId();
+    }
 }

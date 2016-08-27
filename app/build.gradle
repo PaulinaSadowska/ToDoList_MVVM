@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'android-apt'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 24
@@ -101,6 +102,4 @@ dependencies {
     //Junit
     testCompile 'junit:junit:4.12'
 
-    //Realm
-    compile 'io.realm:realm-android:0.87.0'
 }
