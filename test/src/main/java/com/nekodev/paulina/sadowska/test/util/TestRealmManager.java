@@ -2,10 +2,6 @@ package com.nekodev.paulina.sadowska.test.util;
 
 import android.content.Context;
 
-import com.nekodev.paulina.sadowska.test.injection.components.ApplicationTestComponent;
-import com.nekodev.paulina.sadowska.test.injection.components.DaggerRealmManagerTestComponent;
-import com.nekodev.paulina.sadowska.test.injection.modules.RealmManagerTestModule;
-import com.nekodev.paulina.sadowska.todolist_mvvm.ToDoListApplication;
 import com.nekodev.paulina.sadowska.todolist_mvvm.data.RealmManager;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 
@@ -21,13 +17,7 @@ public class TestRealmManager extends RealmManager {
 
     @Override
     protected void injectDependencies(Context context) {
-        ApplicationTestComponent testComponent = (ApplicationTestComponent)
-                ToDoListApplication.get(context).getComponent();
-        DaggerRealmManagerTestComponent.builder()
-                .applicationTestComponent(testComponent)
-                .realmManagerTestModule(new RealmManagerTestModule())
-                .build()
-                .inject(this);
+        //do nothing, dont want to mock Realm, just do not use it
     }
 
     public ToDoItem getSavedTask(int id) {
