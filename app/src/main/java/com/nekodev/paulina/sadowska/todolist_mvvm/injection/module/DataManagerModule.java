@@ -9,8 +9,6 @@ import com.nekodev.paulina.sadowska.todolist_mvvm.injection.scope.PerDataManager
 
 import dagger.Module;
 import dagger.Provides;
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
 import rx.Scheduler;
 import rx.schedulers.Schedulers;
 
@@ -21,10 +19,8 @@ import rx.schedulers.Schedulers;
 @Module
 public class DataManagerModule {
 
-    private Context mContext;
 
     public DataManagerModule(Context context) {
-        this.mContext = context;
     }
 
     @Provides
@@ -39,10 +35,4 @@ public class DataManagerModule {
         return Schedulers.io();
     }
 
-    @Provides
-    @PerDataManager
-    Realm provideRealm() {
-        Realm.setDefaultConfiguration(new RealmConfiguration.Builder(mContext).build());
-        return Realm.getDefaultInstance();
-    }
 }

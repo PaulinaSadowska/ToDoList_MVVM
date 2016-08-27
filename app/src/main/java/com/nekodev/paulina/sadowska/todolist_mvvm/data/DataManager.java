@@ -8,11 +8,8 @@ import com.nekodev.paulina.sadowska.todolist_mvvm.injection.components.DaggerDat
 import com.nekodev.paulina.sadowska.todolist_mvvm.injection.module.DataManagerModule;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
-import io.realm.Realm;
 import rx.Observable;
 import rx.Scheduler;
 
@@ -26,8 +23,7 @@ public class DataManager {
     protected ToDoService mToDoService;
     @Inject
     protected Scheduler mSubscribeScheduler;
-    @Inject
-    protected Realm mRealm;
+
 
     public DataManager(Context context) {
         injectDependencies(context);
@@ -38,10 +34,9 @@ public class DataManager {
      * work for the unit test variant, plus Dagger 2 doesn't provide a nice way of overriding
      * modules */
     public DataManager(ToDoService gitHubService,
-                       Scheduler subscribeScheduler, Realm realm) {
+                       Scheduler subscribeScheduler) {
         mToDoService = gitHubService;
         mSubscribeScheduler = subscribeScheduler;
-        mRealm = realm;
     }
 
     protected void injectDependencies(Context context) {
@@ -53,22 +48,8 @@ public class DataManager {
     }
 
     public Observable<ToDoItem> getTasks() {
-        return getSavedTasks()
-                .mergeWith(mToDoService.getTasks())
-                .flatMap(Observable::from)
-                .distinct(ToDoItem::getId);
-    }
-
-    private Observable<List<ToDoItem>> getSavedTasks() {
-        return Observable.just(
-                mRealm.copyFromRealm(mRealm.where(ToDoItem.class).findAllSorted("id")));
-    }
-
-
-    public void saveTask(ToDoItem task) {
-        mRealm.beginTransaction();
-        mRealm.copyToRealmOrUpdate(task);
-        mRealm.commitTransaction();
+        return mToDoService.getTasks()
+                .flatMap(Observable::from);
     }
 
     public Scheduler getScheduler() {

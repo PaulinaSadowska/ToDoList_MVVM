@@ -3,6 +3,7 @@ package com.nekodev.paulina.sadowska.todolist_mvvm.injection.module;
 import android.app.Application;
 
 import com.nekodev.paulina.sadowska.todolist_mvvm.data.DataManager;
+import com.nekodev.paulina.sadowska.todolist_mvvm.data.RealmManager;
 
 import javax.inject.Singleton;
 
@@ -32,6 +33,12 @@ public class ApplicationModule {
     @Singleton
     DataManager provideDataManager() {
         return new DataManager(mApplication);
+    }
+
+    @Provides
+    @Singleton
+    RealmManager provideRealmManager() {
+        return new RealmManager(mApplication);
     }
 
 }

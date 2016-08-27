@@ -3,6 +3,7 @@ package com.nekodev.paulina.sadowska.todolist_mvvm.injection.components;
 import android.app.Application;
 
 import com.nekodev.paulina.sadowska.todolist_mvvm.data.DataManager;
+import com.nekodev.paulina.sadowska.todolist_mvvm.data.RealmManager;
 import com.nekodev.paulina.sadowska.todolist_mvvm.injection.module.ApplicationModule;
 import com.nekodev.paulina.sadowska.todolist_mvvm.controller.activity.MainActivity;
 
@@ -22,4 +23,5 @@ public interface ApplicationComponent {
 
     Application application();
     DataManager dataManager();
+    RealmManager realmManager();
 }

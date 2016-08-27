@@ -3,12 +3,16 @@ package com.nekodev.paulina.sadowska.test.injection.modules;
 /**
  * Created by Paulina Sadowska on 21.08.2016.
  */
+
 import android.app.Application;
 
-import com.nekodev.paulina.sadowska.todolist_mvvm.data.DataManager;
 import com.nekodev.paulina.sadowska.test.util.TestDataManager;
+import com.nekodev.paulina.sadowska.test.util.TestRealmManager;
+import com.nekodev.paulina.sadowska.todolist_mvvm.data.DataManager;
+import com.nekodev.paulina.sadowska.todolist_mvvm.data.RealmManager;
 
 import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -34,6 +38,12 @@ public class ApplicationTestModule {
     @Singleton
     DataManager provideDataManager() {
         return new TestDataManager(mApplication);
+    }
+
+    @Provides
+    @Singleton
+    RealmManager provideRealmManager() {
+        return new TestRealmManager(mApplication);
     }
 
 }

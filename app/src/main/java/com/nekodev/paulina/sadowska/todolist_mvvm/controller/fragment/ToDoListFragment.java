@@ -15,6 +15,7 @@ import com.nekodev.paulina.sadowska.todolist_mvvm.ToDoListApplication;
 import com.nekodev.paulina.sadowska.todolist_mvvm.controller.activity.EditTaskActivity;
 import com.nekodev.paulina.sadowska.todolist_mvvm.controller.adapter.ToDoListAdapter;
 import com.nekodev.paulina.sadowska.todolist_mvvm.data.DataManager;
+import com.nekodev.paulina.sadowska.todolist_mvvm.data.RealmManager;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 
 import java.io.Serializable;
@@ -40,6 +41,7 @@ public class ToDoListFragment extends Fragment {
 
     private ToDoListAdapter mToDoListAdapter;
     private DataManager mDataManager;
+    private RealmManager mRealmManager;
     private CompositeSubscription mCompositeSubscription;
 
 
@@ -47,8 +49,9 @@ public class ToDoListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mToDoListAdapter = new ToDoListAdapter(getActivity());
-        mDataManager = ToDoListApplication.get(getActivity()).getComponent().dataManager();
         mCompositeSubscription = new CompositeSubscription();
+        mDataManager = ToDoListApplication.get(getActivity()).getComponent().dataManager();
+        mRealmManager = ToDoListApplication.get(getActivity()).getComponent().realmManager();
     }
 
     @Override
@@ -77,7 +80,7 @@ public class ToDoListFragment extends Fragment {
             if(data.hasExtra(EXTRA_TASK_DATA)) {
                 ToDoItem task = (ToDoItem) data.getExtras().getSerializable(EXTRA_TASK_DATA);
                 mToDoListAdapter.editTask(task);
-                mDataManager.saveTask(task);
+                mRealmManager.saveTask(task);
             }
         }
     }
@@ -113,7 +116,8 @@ public class ToDoListFragment extends Fragment {
 
                     @Override
                     public void onNext(ToDoItem task) {
-                        mToDoListAdapter.addTask(task);
+                        ToDoItem savedTask = mRealmManager.getSavedTask(task.getId());
+                        mToDoListAdapter.addTask(savedTask != null? savedTask : task);
                     }
                 }));
     }
