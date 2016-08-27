@@ -50,14 +50,14 @@ public class TaskViewModelTest {
     public void shouldSetIsCompleted() {
         mTaskViewModel.setIsCompleted(false);
         assertTrue(mTaskViewModel.isCompleted() == mToDoItem.isCompleted());
-        assertTrue(mToDoItem.wasModified());
+        assertTrue(mToDoItem.getModified());
         mTaskViewModel.setIsCompleted(true);
         assertTrue(mTaskViewModel.isCompleted() == mToDoItem.isCompleted());
     }
 
     @Test
     public void shouldBeVisibleWhenItemWasModified(){
-        mToDoItem.setWasModified();
+        mToDoItem.setModified();
         assertEquals(mTaskViewModel.wasModified(), View.VISIBLE);
     }
 

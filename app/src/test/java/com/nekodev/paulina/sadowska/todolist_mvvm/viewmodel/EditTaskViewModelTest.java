@@ -42,7 +42,7 @@ public class EditTaskViewModelTest {
     public void shouldSetIsCompleted() {
         mEditTaskViewModel.setIsCompleted(false);
         assertTrue(mEditTaskViewModel.isCompleted() == mToDoItem.isCompleted());
-        assertTrue(mToDoItem.wasModified());
+        assertTrue(mToDoItem.getModified());
         mEditTaskViewModel.setIsCompleted(true);
         assertTrue(mEditTaskViewModel.isCompleted() == mToDoItem.isCompleted());
     }
@@ -57,7 +57,7 @@ public class EditTaskViewModelTest {
         String taskStr = "some task";
         mEditTaskViewModel.setTask(taskStr);
         assertTrue(mEditTaskViewModel.getTask().equals(mToDoItem.getTask()));
-        assertTrue(mToDoItem.wasModified());
+        assertTrue(mToDoItem.getModified());
     }
 
     @Test

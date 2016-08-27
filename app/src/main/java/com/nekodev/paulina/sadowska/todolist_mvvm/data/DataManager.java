@@ -4,12 +4,13 @@ import android.content.Context;
 
 import com.nekodev.paulina.sadowska.todolist_mvvm.ToDoListApplication;
 import com.nekodev.paulina.sadowska.todolist_mvvm.data.remote.ToDoService;
-import com.nekodev.paulina.sadowska.todolist_mvvm.injection.module.DataManagerModule;
 import com.nekodev.paulina.sadowska.todolist_mvvm.injection.components.DaggerDataManagerComponent;
+import com.nekodev.paulina.sadowska.todolist_mvvm.injection.module.DataManagerModule;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 
 import javax.inject.Inject;
 
+import io.realm.Realm;
 import rx.Observable;
 import rx.Scheduler;
 
@@ -21,6 +22,7 @@ public class DataManager  {
 
     @Inject protected ToDoService mToDoService;
     @Inject protected Scheduler mSubscribeScheduler;
+    @Inject protected Realm mRealm;
 
     public DataManager(Context context) {
         injectDependencies(context);
@@ -31,15 +33,16 @@ public class DataManager  {
      * work for the unit test variant, plus Dagger 2 doesn't provide a nice way of overriding
      * modules */
     public DataManager(ToDoService gitHubService,
-                       Scheduler subscribeScheduler) {
+                       Scheduler subscribeScheduler, Realm realm) {
         mToDoService = gitHubService;
         mSubscribeScheduler = subscribeScheduler;
+        mRealm = realm;
     }
 
     protected void injectDependencies(Context context) {
         DaggerDataManagerComponent.builder()
                 .applicationComponent(ToDoListApplication.get(context).getComponent())
-                .dataManagerModule(new DataManagerModule())
+                .dataManagerModule(new DataManagerModule(context))
                 .build()
                 .inject(this);
     }
@@ -47,6 +50,12 @@ public class DataManager  {
     public Observable<ToDoItem> getTasks(){
         return mToDoService.getTasks()
                 .flatMap(Observable::from);
+    }
+
+    public void saveTask(ToDoItem task){
+        mRealm.beginTransaction();
+        mRealm.copyToRealmOrUpdate(task);
+        mRealm.commitTransaction();
     }
 
     public Scheduler getScheduler() {

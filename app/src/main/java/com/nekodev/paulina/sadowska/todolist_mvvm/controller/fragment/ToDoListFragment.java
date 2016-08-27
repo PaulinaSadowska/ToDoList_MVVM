@@ -13,9 +13,9 @@ import android.widget.Toast;
 import com.nekodev.paulina.sadowska.todolist_mvvm.R;
 import com.nekodev.paulina.sadowska.todolist_mvvm.ToDoListApplication;
 import com.nekodev.paulina.sadowska.todolist_mvvm.controller.activity.EditTaskActivity;
+import com.nekodev.paulina.sadowska.todolist_mvvm.controller.adapter.ToDoListAdapter;
 import com.nekodev.paulina.sadowska.todolist_mvvm.data.DataManager;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
-import com.nekodev.paulina.sadowska.todolist_mvvm.controller.adapter.ToDoListAdapter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -75,7 +75,9 @@ public class ToDoListFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == EditTaskActivity.ACTIVITY_RESULT_CODE && mToDoListAdapter!=null && data != null){
             if(data.hasExtra(EXTRA_TASK_DATA)) {
-                mToDoListAdapter.editTask((ToDoItem) data.getExtras().getSerializable(EXTRA_TASK_DATA));
+                ToDoItem task = (ToDoItem) data.getExtras().getSerializable(EXTRA_TASK_DATA);
+                mToDoListAdapter.editTask(task);
+                mDataManager.saveTask(task);
             }
         }
     }

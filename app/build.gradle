@@ -100,4 +100,7 @@ dependencies {
 
     //Junit
     testCompile 'junit:junit:4.12'
+
+    //Realm
+    compile 'io.realm:realm-android:0.87.0'
 }

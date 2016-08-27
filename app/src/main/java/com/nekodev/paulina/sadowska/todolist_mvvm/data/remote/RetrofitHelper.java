@@ -1,5 +1,6 @@
 package com.nekodev.paulina.sadowska.todolist_mvvm.data.remote;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import retrofit2.Retrofit;
@@ -15,11 +16,15 @@ public class RetrofitHelper {
     public ToDoService newToDoListService() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ToDoService.ENDPOINT)
-                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()))
+                .addConverterFactory(GsonConverterFactory.create(getGson()))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
         return retrofit.create(ToDoService.class);
+    }
+
+    private Gson getGson() {
+        return new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     }
 
 }

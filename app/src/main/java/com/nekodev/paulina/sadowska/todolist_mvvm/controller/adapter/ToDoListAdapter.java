@@ -68,14 +68,6 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.Bindin
         if(id<mToDoList.size() && mToDoList.get(id-1).getId() == id){
             mToDoList.set(id-1, taskItem);
             notifyItemChanged(id-1);
-            return;
-        }
-        for (int i = 0; i < mToDoList.size(); i++) {
-            if(mToDoList.get(i).getId()==taskItem.getId()){
-                mToDoList.set(i, taskItem);
-                notifyItemChanged(id-1);
-                return;
-            }
         }
     }
 
