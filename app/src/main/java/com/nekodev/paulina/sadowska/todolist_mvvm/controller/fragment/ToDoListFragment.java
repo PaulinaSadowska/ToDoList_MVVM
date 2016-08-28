@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -120,5 +121,10 @@ public class ToDoListFragment extends Fragment {
                         mToDoListAdapter.addTask(savedTask != null? savedTask : task);
                     }
                 }));
+    }
+
+    @OnClick(R.id.save_remotely_button)
+    public void saveRemotely(){
+        Toast.makeText(getActivity(), "save", Toast.LENGTH_SHORT).show();
     }
 }
