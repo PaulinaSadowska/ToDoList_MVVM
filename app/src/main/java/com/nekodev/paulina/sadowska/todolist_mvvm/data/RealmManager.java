@@ -49,4 +49,10 @@ public class RealmManager {
         mRealm.copyToRealmOrUpdate(task);
         mRealm.commitTransaction();
     }
+
+    public void removeAllSavedTasks() {
+        mRealm.beginTransaction();
+        mRealm.deleteAll();
+        mRealm.commitTransaction();
+    }
 }

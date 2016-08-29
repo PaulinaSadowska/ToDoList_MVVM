@@ -27,9 +27,8 @@ public interface ToDoService {
 
     @FormUrlEncoded
     @PUT("/todo_list/{id}")
-    Observable<ResponseBody> putSavedTasks(@Field("title") String title,
-                                     @Field("userId") int userId,
-                                     @Path("id") int id,
-                                     @Field("completed") boolean completed);
+    Observable<ResponseBody> putSavedTasks(@Field("task") String task,
+                                           @Path("id") int id,
+                                           @Field("completed") boolean completed);
 
 }

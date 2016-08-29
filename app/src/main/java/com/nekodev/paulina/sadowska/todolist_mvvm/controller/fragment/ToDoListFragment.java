@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.ResponseBody;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -125,6 +126,27 @@ public class ToDoListFragment extends Fragment {
 
     @OnClick(R.id.save_remotely_button)
     public void saveRemotely(){
-        Toast.makeText(getActivity(), "save", Toast.LENGTH_SHORT).show();
+        mCompositeSubscription
+                .add(mDataManager.saveModifiedTasks(mToDoListAdapter.getModifiedTasks())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(mDataManager.getScheduler())
+                .subscribe(new Subscriber<ResponseBody>() {
+                    @Override
+                    public void onCompleted() {
+                        mToDoListAdapter.markAllAsNotModified();
+                        mRealmManager.removeAllSavedTasks();
+                        Toast.makeText(getActivity(), "saved", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(getActivity(), R.string.saving_data_problem, Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody responseBody) { }
+                }));
+
     }
 }

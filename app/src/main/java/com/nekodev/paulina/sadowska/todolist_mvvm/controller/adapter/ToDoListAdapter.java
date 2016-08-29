@@ -13,6 +13,7 @@ import com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.TaskViewModel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Paulina Sadowska on 20.08.2016.
@@ -68,6 +69,25 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.Bindin
         if(id<mToDoList.size() && mToDoList.get(id-1).getId() == id){
             mToDoList.set(id-1, taskItem);
             notifyItemChanged(id-1);
+        }
+    }
+
+    public List<ToDoItem> getModifiedTasks() {
+        List<ToDoItem> modifiedTasks = new ArrayList<>();
+        for (ToDoItem toDoItem : mToDoList) {
+            if(toDoItem.getModified()) {
+                modifiedTasks.add(toDoItem);
+            }
+        }
+        return  modifiedTasks;
+    }
+
+    public void markAllAsNotModified() {
+        for (int i = 0; i < mToDoList.size(); i++) {
+            if(mToDoList.get(i).getModified()){
+                mToDoList.get(i).setModified(false);
+                notifyItemChanged(i);
+            }
         }
     }
 

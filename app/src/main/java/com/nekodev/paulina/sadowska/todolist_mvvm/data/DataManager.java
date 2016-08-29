@@ -8,8 +8,11 @@ import com.nekodev.paulina.sadowska.todolist_mvvm.injection.components.DaggerDat
 import com.nekodev.paulina.sadowska.todolist_mvvm.injection.module.DataManagerModule;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.Scheduler;
 
@@ -50,6 +53,12 @@ public class DataManager {
     public Observable<ToDoItem> getTasks() {
         return mToDoService.getTasks()
                 .flatMap(Observable::from);
+    }
+
+    public Observable<ResponseBody> saveModifiedTasks(List<ToDoItem> tasks){
+        return Observable
+                .from(tasks)
+                .flatMap(task -> mToDoService.putSavedTasks(task.getTask(), task.getId(), task.isCompleted()));
     }
 
     public Scheduler getScheduler() {
