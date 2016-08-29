@@ -49,6 +49,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.Bindin
     public void onBindViewHolder(ToDoListAdapter.BindingHolder holder, int position) {
         ItemTodoBinding todoBinding = holder.binding;
         todoBinding.setViewModel(new TaskViewModel(mContext, mToDoList.get(position)));
+        holder.binding.executePendingBindings();
     }
 
     @Override
