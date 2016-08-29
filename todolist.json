@@ -1,65 +1,59 @@
 {
-    "todo_list": [
-        {
-            "task": "go out with the dog",
-            "completed": false,
-            "id": 1
+  "todo_list": [
+    {
+      "task": "go out with the dog",
+      "completed": false,
+      "id": 1
     },
-        {
-            "task": "make dinner",
-            "completed": false,
-            "id": 2
+    {
+      "task": "make dinner",
+      "completed": false,
+      "id": 2
     },
-        {
-            "task": "throw out the garbage",
-            "completed": false,
-            "id": 3
+    {
+      "task": "throw out the garbaggfcge",
+      "completed": false,
+      "id": 3
+    },
+    {
+      "task": "clean the dishes",
+      "completed": false,
+      "id": 4
+    },
+    {
+      "task": "clean the dishes",
+      "completed": false,
+      "id": 5
+    },
+    {
+      "task": "clean the dishes 6",
+      "completed": false,
+      "id": 6
+    },
+    {
+      "task": "clean the dishes 7",
+      "completed": false,
+      "id": 7
+    },
+    {
+      "task": "clean the dishes 8",
+      "completed": false,
+      "id": 8
+    },
+    {
+      "task": "clean the dishes 9",
+      "completed": false,
+      "id": 9
+    },
+    {
+      "task": "clean the dishes 11",
+      "completed": false,
+      "id": 10
+    },
+    {
+      "task": "go out with the dog",
+      "completed": true,
+      "id": 11
     }
-        ,
-        {
-            "task": "clean the dishes",
-            "completed": false,
-            "id": 4
-    }
-        ,
-        {
-            "task": "clean the dishes",
-            "completed": false,
-            "id": 5
-    }
-        ,
-        {
-            "task": "clean the dishes 6",
-            "completed": false,
-            "id": 6
-    }
-        ,
-        {
-            "task": "clean the dishes 7",
-            "completed": false,
-            "id": 7
-    }
-        ,
-        {
-            "task": "clean the dishes 8",
-            "completed": false,
-            "id": 8
-    }
-        ,
-        {
-            "task": "clean the dishes 9",
-            "completed": false,
-            "id": 9
-    }
-        ,
-        {
-            "task": "clean the dishes 11",
-            "completed": false,
-            "id": 10
-    }, {
-            "task": "go out with the dog",
-            "completed": true,
-            "id": 11
-    }
-            ]
-    }
+  ]
+}

@@ -92,10 +92,10 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.Bindin
         }
     }
 
-    public static class BindingHolder extends RecyclerView.ViewHolder {
+    static class BindingHolder extends RecyclerView.ViewHolder {
         private ItemTodoBinding binding;
 
-        public BindingHolder(ItemTodoBinding binding) {
+        BindingHolder(ItemTodoBinding binding) {
             super(binding.cardView);
             this.binding = binding;
         }
