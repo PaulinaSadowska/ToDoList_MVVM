@@ -84,6 +84,12 @@ public class MainActivityTest {
         Intents.release();
     }
 
+    @Test
+    public void testDisplaysSaveButton(){
+        main.launchActivity(null);
+        onView(withId(R.id.save_remotely_button)).check(matches(isDisplayed()));
+    }
+
     private void stubMockTask(ToDoItem task) {
         ArrayList<ToDoItem> tasks = new ArrayList<>();
         tasks.add(task);

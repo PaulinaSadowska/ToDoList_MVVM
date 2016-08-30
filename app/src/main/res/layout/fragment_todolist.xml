@@ -7,9 +7,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_todos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:padding="@dimen/recyclerview_padding" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/save_remotely_button"
@@ -17,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        />
+        android:src="@drawable/ic_save_white_24dp" />
 
 
 </FrameLayout>
