@@ -13,6 +13,9 @@ import com.nekodev.paulina.sadowska.todolist_mvvm.R;
 import com.nekodev.paulina.sadowska.todolist_mvvm.controller.activity.EditTaskActivity;
 import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 
+import rx.Observable;
+import rx.subjects.PublishSubject;
+
 /**
  * Created by Paulina Sadowska on 20.08.2016.
  */
@@ -21,10 +24,12 @@ public class TaskViewModel extends BaseObservable {
 
     private Context mContext;
     private ToDoItem mTask;
+    final PublishSubject<Boolean> dataChanged;
 
     public TaskViewModel(Context context, ToDoItem task){
         this.mContext = context;
         this.mTask = task;
+        dataChanged =  PublishSubject.create();
     }
 
     public boolean isCompleted(){
@@ -34,6 +39,11 @@ public class TaskViewModel extends BaseObservable {
     public void setIsCompleted(boolean completed){
         mTask.setCompleted(completed);
         mTask.setModified();
+        dataChanged.onCompleted();
+    }
+
+    public Observable<Boolean> getDataChangedObservable(){
+        return dataChanged;
     }
 
     public String getTask(){

@@ -7,13 +7,18 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.nekodev.paulina.sadowska.todolist_mvvm.R;
-import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 import com.nekodev.paulina.sadowska.todolist_mvvm.databinding.ItemTodoBinding;
+import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
 import com.nekodev.paulina.sadowska.todolist_mvvm.viewmodel.TaskViewModel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by Paulina Sadowska on 20.08.2016.
@@ -50,6 +55,22 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.Bindin
         ItemTodoBinding todoBinding = holder.binding;
         todoBinding.setViewModel(new TaskViewModel(mContext, mToDoList.get(position)));
         holder.binding.executePendingBindings();
+        new CompositeSubscription().add(holder.binding.getViewModel().getDataChangedObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<Boolean>() {
+                    @Override
+                    public void onCompleted() {
+                        notifyItemChanged(holder.getAdapterPosition());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {  }
+
+                    @Override
+                    public void onNext(Boolean aBoolean) {  }
+                }));
+
     }
 
     @Override
