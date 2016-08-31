@@ -42,6 +42,7 @@
                 android:layout_toEndOf="@id/task_item_checkbox"
                 android:fontFamily="sans-serif-light"
                 android:text="@{viewModel.task}"
+                android:textColor="@{viewModel.taskTextColor}"
                 android:textSize="14sp"
                 tools:text="TARARA \n hsjgas \n jhdfjhas \n HASGDHGCFS" />
 
