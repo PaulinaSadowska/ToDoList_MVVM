@@ -7,10 +7,10 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.nekodev.paulina.sadowska.test.injection.TestComponentRule;
 import com.nekodev.paulina.sadowska.todolist_mvvm.R;
-import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
-import com.nekodev.paulina.sadowska.todolist_mvvm.util.MockModelUtil;
 import com.nekodev.paulina.sadowska.todolist_mvvm.controller.activity.EditTaskActivity;
 import com.nekodev.paulina.sadowska.todolist_mvvm.controller.activity.MainActivity;
+import com.nekodev.paulina.sadowska.todolist_mvvm.model.ToDoItem;
+import com.nekodev.paulina.sadowska.todolist_mvvm.util.MockModelUtil;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -114,6 +114,20 @@ public class MainActivityTest {
 
     private void checkTaskDisplays(ToDoItem task) {
         onView(withText(task.getTask()))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testCheckIsCompleted_TaskModifiedMarkAppears() {
+        ToDoItem task = MockModelUtil.createMockTask();
+        task.setCompleted(false);
+        stubMockTask(task);
+        main.launchActivity(null);
+        onView(withId(R.id.task_item_checkbox))
+                .perform(click())
+                .check(matches(isChecked()));
+        assertTrue(task.getModified());
+        onView(withId(R.id.was_modified_icon))
                 .check(matches(isDisplayed()));
     }
 }

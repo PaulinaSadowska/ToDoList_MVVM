@@ -47,6 +47,7 @@
                 tools:text="TARARA \n hsjgas \n jhdfjhas \n HASGDHGCFS" />
 
             <ImageView
+                android:id="@+id/was_modified_icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/star"
