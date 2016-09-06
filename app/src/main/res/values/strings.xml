@@ -3,4 +3,5 @@
     <string name="connection_problem">There was problem while fetching data</string>
     <string name="save_task">SAVE</string>
     <string name="saving_data_problem">Error while saving data to server</string>
+    <string name="completed">Completed</string>
 </resources>
