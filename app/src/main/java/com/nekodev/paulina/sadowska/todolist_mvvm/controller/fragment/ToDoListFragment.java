@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.ResponseBody;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.CompositeSubscription;
 
@@ -60,10 +58,10 @@ public class ToDoListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_todolist, container, false);
         ButterKnife.bind(this, view);
-        if(savedInstanceState!=null && savedInstanceState.containsKey(SAVED_TASKS_KEY)){
+        if (savedInstanceState != null && savedInstanceState.containsKey(SAVED_TASKS_KEY)) {
             Serializable tasks = savedInstanceState.getSerializable(SAVED_TASKS_KEY);
-            if(tasks instanceof ArrayList) {
-                mToDoListAdapter.addTasks((ArrayList)tasks);
+            if (tasks instanceof ArrayList) {
+                mToDoListAdapter.addTasks((ArrayList) tasks);
             }
         }
         setupRecyclerView();
@@ -78,8 +76,8 @@ public class ToDoListFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == EditTaskActivity.ACTIVITY_RESULT_CODE && mToDoListAdapter!=null && data != null){
-            if(data.hasExtra(EXTRA_TASK_DATA)) {
+        if (requestCode == EditTaskActivity.ACTIVITY_RESULT_CODE && mToDoListAdapter != null && data != null) {
+            if (data.hasExtra(EXTRA_TASK_DATA)) {
                 ToDoItem task = (ToDoItem) data.getExtras().getSerializable(EXTRA_TASK_DATA);
                 mToDoListAdapter.editTask(task);
                 mRealmManager.saveTask(task);
@@ -97,7 +95,7 @@ public class ToDoListFragment extends Fragment {
         mToDoList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mToDoList.setHasFixedSize(true);
         mToDoList.setAdapter(mToDoListAdapter);
-        if(mToDoListAdapter.getItemCount()==0) {
+        if (mToDoListAdapter.getItemCount() == 0) {
             getTaskList();
         }
     }
@@ -106,47 +104,37 @@ public class ToDoListFragment extends Fragment {
         mCompositeSubscription.add(mDataManager.getTasks()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(mDataManager.getScheduler())
-                .subscribe(new Subscriber<ToDoItem>() {
-                    @Override
-                    public void onCompleted() { }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(getActivity(), R.string.connection_problem, Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
-                    }
-
-                    @Override
-                    public void onNext(ToDoItem task) {
-                        ToDoItem savedTask = mRealmManager.getSavedTask(task.getId());
-                        mToDoListAdapter.addTask(savedTask != null? savedTask : task);
-                    }
-                }));
+                .subscribe(
+                        task -> { //onNext
+                            ToDoItem savedTask = mRealmManager.getSavedTask(task.getId());
+                            mToDoListAdapter.addTask(savedTask != null ? savedTask : task);
+                        }, e -> { //onError
+                            Toast.makeText(getActivity(), R.string.connection_problem, Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        })
+        );
     }
 
+
     @OnClick(R.id.save_remotely_button)
-    public void saveRemotely(){
+    public void saveRemotely() {
         mCompositeSubscription
                 .add(mDataManager.saveModifiedTasks(mToDoListAdapter.getModifiedTasks())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(mDataManager.getScheduler())
-                .subscribe(new Subscriber<ResponseBody>() {
-                    @Override
-                    public void onCompleted() {
-                        mToDoListAdapter.markAllAsNotModified();
-                        mRealmManager.removeAllSavedTasks();
-                        Toast.makeText(getActivity(), "saved", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(getActivity(), R.string.saving_data_problem, Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
-                    }
-
-                    @Override
-                    public void onNext(ResponseBody responseBody) { }
-                }));
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(mDataManager.getScheduler())
+                        .subscribe(
+                                responseBody -> { //onNext
+                                },
+                                e -> { //onError
+                                    Toast.makeText(getActivity(), R.string.saving_data_problem, Toast.LENGTH_SHORT).show();
+                                    e.printStackTrace();
+                                },
+                                () -> { //onComplete
+                                    mToDoListAdapter.markAllAsNotModified();
+                                    mRealmManager.removeAllSavedTasks();
+                                    Toast.makeText(getActivity(), "saved", Toast.LENGTH_SHORT).show();
+                                })
+                );
 
     }
 }

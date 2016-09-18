@@ -2,12 +2,12 @@
   "todo_list": [
     {
       "task": "go out with the dog",
-      "completed": false,
+      "completed": true,
       "id": 1
     },
     {
-      "task": "do the laundry",
-      "completed": false,
+      "task": "do the laundryg",
+      "completed": true,
       "id": 2
     },
     {
